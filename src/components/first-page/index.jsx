@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 const AllFilms = () => {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
 
   useEffect(() => {
     console.log('in useEffect');
@@ -12,17 +14,23 @@ const AllFilms = () => {
   }, []);
 
   const setFilms = useCallback(async () => {
-    setIsLoading(true);
-    const films = 'https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:1%7D&extended=true';
+    try {
+      setIsLoading(true);
+      const films = 'https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:1%7D&extended=true';
 
-    const data = await fetch(films);
+      const data = await fetch(films);
 
-    const filmList = await data.json();
-    console.log(filmList);
+      const filmList = await data.json();
+      console.log(filmList);
 
-    setList(filmList);
-    // setList([]); // проверка на пустой массив
-    setIsLoading(false);
+      setList(filmList);
+      // setList([]); // проверка на пустой массив
+      setIsLoading(false);
+      // throw new Error('error');
+    } 
+    catch (error) {
+      setIsError(true);
+    }
   })
 
   let answer;
@@ -44,15 +52,20 @@ const AllFilms = () => {
 
   return (
     <div id='filmsList'>
-
-      {isLoading
+      {isError
         ?
-        (<div className='loader'></div>)
+        (<div>'Ooops, something went wrong'</div>)
         :
         (<>
-          {answer}
-        </>)
-      }
+          {isLoading
+            ?
+            (<div className='loader'></div>)
+            :
+            (<>
+              {answer}
+            </>)
+          }
+        </>)}
     </div>
   )
 }
