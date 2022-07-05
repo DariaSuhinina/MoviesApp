@@ -1,0 +1,38 @@
+.filmBlock {
+  width: 210px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.filmBlock * {
+  margin: 10px auto;
+}
+
+.filmPoster {
+  display: block;
+  /* background-size: cover; */
+}
+
+.filmName {
+  text-align: center;
+}
+
+#filmsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 70px auto;
+}
+
+.buyBtn {
+  background-color: #000;
+  color: #fff;
+  border-radius: 30px;
+  margin: 10px 56px;
+  width: 50%;
+  height: 30px;
+  border: #888 solid 1px;
+}
