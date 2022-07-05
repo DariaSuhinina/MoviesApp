@@ -17,6 +17,7 @@ const Movie = ({ match }) => {
 
   const setInfo = useCallback(async () => {
     setIsLoading(true);
+
     const url =
       `https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22event%22:%22${params.eventId}%22,%22city%22:%221%22%7D&extended=true`;
 
@@ -30,22 +31,19 @@ const Movie = ({ match }) => {
     setIsLoading(false);
   })
 
-  if (isLoading) {
-    return (
-      <div>movies is loading</div>
-    )
-  }
 return (
   <div className='moviePage' style={{ display: 'flex', flexDirection: 'column', marginLeft: 30}}>
     
     {isLoading
       ?
-      (<div>movie is loading</div>)
+      (<span className='loader'></span>)
       :
     (<>
     {movie.map((m) =>
       <div key={m.eventId}>
+
         <img src={m.posterLink} alt="movie" style={{ width: 190, height: 280, marginTop: 20}} />
+
         <div className='movieName' style={{marginTop: 20}}><strong>{m.name}</strong></div>
         <div className='movieAnnotation' style={{marginTop: 20}}>{m.annotation}</div>
       </div>

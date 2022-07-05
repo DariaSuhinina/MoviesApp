@@ -21,28 +21,37 @@ const AllFilms = () => {
     console.log(filmList);
 
     setList(filmList);
+    // setList([]); // проверка на пустой массив
     setIsLoading(false);
   })
+
+  let answer;
+  
+  if (list.length === 0) {
+    answer = <div>"We've found no movies, sorry!"</div>
+  }
+  else {
+    answer = list.map((i) =>
+      <div className='filmBlock' id={`block${i}`} key={i.eventId}>
+
+        <img className='filmPoster' src={i.posterLink} alt='movie' style={{ width: 190, height: 270 }} />
+        <div className='filmName'>{i.name}</div>
+
+        <button className='buyBtn'><Link to={`../movie-page/${i.eventId}`}>Купить билет</Link></button>
+
+      </div>)
+  }
 
   return (
     <div id='filmsList'>
 
       {isLoading
         ?
-        (<div>movie is loading</div>)
+        (<div className='loader'></div>)
         :
         (<>
-          {list.map((i) =>
-            <div className='filmBlock' id={`block${i}`} key={i.eventId}>
-              <img className='filmPoster' src={i.posterLink} alt='movie' style={{ width: 190, height: 270 }} />
-
-              <div className='filmName'>{i.name}</div>
-              <button className='buyBtn'><Link to={`../movie-page/${i.eventId}`}>Купить билет</Link></button>
-
-            </div>
-          )}
-        </>
-        )
+          {answer}
+        </>)
       }
     </div>
   )
