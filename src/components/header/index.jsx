@@ -3,7 +3,7 @@ import React from 'react';
 import Sign from './sign';
 import Logo from './logo';
 
-const Header = () => {
+const Header = (props) => {
   
   return (
     <div className='header'>
