@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import MovieShedule from '../movie-shedule';
 
 const Movie = ({ match }) => {
   const [movie, setMovie] = useState([]);
@@ -9,6 +10,7 @@ const Movie = ({ match }) => {
   const params = useParams();
 
   console.log('params', params.eventId);
+  console.log('params', params);
   console.log('movie', movie);
 
   useEffect(() => {
@@ -50,27 +52,20 @@ const Movie = ({ match }) => {
           :
           (<>
             {movie.map((m) =>
+              
               <div key={m.eventId}>
-
+                {console.log(m)}
                 <img src={m.posterLink} alt="movie" style={{ width: 190, height: 280, marginTop: 20 }} />
 
                 <div className='movieName' style={{ marginTop: 20 }}><strong>{m.name}</strong></div>
                 <div className='movieAnnotation' style={{ marginTop: 20 }}>{m.annotation}</div>
+                <MovieShedule shedule={m}/>
               </div>
             )}
           </>)
         }</>)
       }
-        
-      {/* <>
-        <img src={movie[0].posterLink} alt="movie" style={{ width: 190, height: 280, marginTop: 20}} />
-        <div className='movieName' style={{marginTop: 20}}><strong>{movie[0].name}</strong></div>
-        <div className='movieAnnotation' style={{marginTop: 20}}>{movie[0].annotation}</div>
-        </>  */}
-      {/* фрагментом не работает */}
-
-    </div>
-  )
-}
+      </div>
+      )}
 
 export default Movie;
