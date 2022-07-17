@@ -7,6 +7,7 @@ import Movie from './components/movie-page';
 
 import './components/first-page/film.css';
 import './components/header/style.css';
+import ScrollToTop from './components/scroll-to-top';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<AllFilms />} />
         <Route path='/movie-page/:eventId' element={<Movie />} />
