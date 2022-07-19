@@ -8,18 +8,27 @@ import Movie from './components/movie-page';
 import './components/first-page/film.css';
 import './components/header/style.css';
 import ScrollToTop from './components/scroll-to-top';
+import BasicModal from './components/modal';
 
 function App() {
+  const [isModalOpen, setisModalOpen] = useState(false);
 
+  const handleClick = () => {
+    setisModalOpen(true);
+  }
 
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
+      <Header setIsOpen={handleClick}/>
       <ScrollToTop />
       <Routes>
         <Route path='/' element={<AllFilms />} />
         <Route path='/movie-page/:eventId' element={<Movie />} />
       </Routes>
+      <BasicModal isActive={isModalOpen} setIsActive={setisModalOpen}/>
+      {/* <BasicModal /> */}
+
     </BrowserRouter>
   );
 }
