@@ -21,10 +21,3 @@
 .logo {
   margin-left: 50px;
 }
-
-#password:before {
-  content: "gbio"
-  /* width: 10px;
-  height: 10px;
-  background-color: red; */
-}

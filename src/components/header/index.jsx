@@ -1,19 +1,16 @@
 import React from 'react';
 
-import Sign from './sign';
 import Logo from './logo';
+import SignButton from './signButton';
 
-import Button from '@mui/material/Button';
-
-const Header = (props) => {
-
-  const { setIsOpen } = props;
+const Header = ({ setIsOpen, setisSignIn, isSignIn, isUserAuthrized, setIsUserAuthrized }) => {
 
   return (
     <div className='header'>
       <Logo />
-      <Sign />
-      <Button id='sign' variant="contained" onClick={setIsOpen}>Sign in</Button>
+
+      <SignButton setIsOpen={setIsOpen} isUserAuthrized={isUserAuthrized} setIsUserAuthrized={setIsUserAuthrized} 
+      setisSignIn ={setisSignIn} isSignIn ={isSignIn}/>
     </div>
   );
 }

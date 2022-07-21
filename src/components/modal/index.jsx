@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import BoxSignIn from '../box1';
+import BoxSignUp from '../box-sign-up';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -17,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ isActive, setIsActive }) {
+export default function BasicModal({ isActive, setIsActive, setIsUserAuthrized, isUserAuthrized, setisSignIn }) {
 
   const handleOpen = () => setIsActive(true);
 
@@ -28,100 +31,97 @@ export default function BasicModal({ isActive, setIsActive }) {
   };
 
   const [email, setEmail] = useState('');
-  const [FirstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
-  }
-
-  const handleChangeFirstName = (e) => {
-    setFirstName(e.target.value);
-  }
-
-  const handleChangeLastName = (e) => {
-    setLastName(e.target.value);
   }
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
   }
 
-  const handleChangeRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  }
+  // const [isEqual, setIsEqual] = useState(true);
 
-  const [isEqual, setIsEqual] = useState(true);
-
-  const [isAuth, setIsAuth] = useState(false);
+  // const [isAuth, setIsAuth] = useState(false);
 
   const [isSucsessfulySignUp, setIsSucsessfulySignUp] = useState(false);
 
-  const handleSubmit = () => {
-    console.log('email', email);
-    console.log('pass', password);
-    console.log('repeat', repeatPassword);
+  // const handleSubmit = () => {
+  //   console.log('email', email);
+  //   console.log('pass', password);
+  //   console.log('repeat', repeatPassword);
 
-    // passwords validate
-    if (password === repeatPassword) {
-      setIsEqual(true);
-      console.log('passwords are equal')
-    } else {
-      setIsEqual(false);
-    }
+  //   // passwords validate
+  //   if (password === repeatPassword) {
+  //     setIsEqual(true);
+  //     console.log('passwords are equal')
+  //     console.log(isEqual)
+  //   } else {
+  //     setIsEqual(false);
+  //   }
 
-    // local storage
-    const usersJson = localStorage.getItem('users');
-    let users = JSON.parse(usersJson) || [];
-    console.log('users', users);
+  //   // local storage
+  //   const usersJson = localStorage.getItem('users');
+  //   let users = JSON.parse(usersJson) || [];
+  //   console.log('users', users);
 
-    const userItem = {
-      'email': email,
-      'FirstName': FirstName,
-      'LastName': LastName,
-      'password': password,
-      'repeatPassword': repeatPassword,
-    }
+  //   const userItem = {
+  //     'email': email,
+  //     'FirstName': FirstName,
+  //     'LastName': LastName,
+  //     'password': password,
+  //     'repeatPassword': repeatPassword,
+  //   }
 
-    const isEmailExist = users.find(item => email == item.email);
-    console.log('exist', isEmailExist);
-    console.log('exist', !!isEmailExist);
+  //   const isEmailExist = users.find(item => email == item.email);
 
-    if (isEmailExist) {
-      setIsAuth(true)
-    } else {
-      localStorage.setItem('users', JSON.stringify([...users, userItem]));
-      setIsSucsessfulySignUp(true)
-    }
-  }
+  //   if (isEmailExist) {
+  //     setIsAuth(true)
+  //   } else if (!isEmailExist) {
+  //     setIsAuth(false)
+  //   }
 
-  //handleSignUp
-  const [isExist, setIsExist] = useState(true);
-  const [isCorrectPassword, setisCorrectPassword] = useState(true);
+  //   if (!isEmailExist && password === repeatPassword) {
+  //     console.log('dtfyguhi')
+  //     localStorage.setItem('users', JSON.stringify([...users, userItem]));
+  //     setIsSucsessfulySignUp(true)
+  //   }
+  // }
+
+  //handleSignIn
+  // const [isExist, setIsExist] = useState(true);
+  // const [isCorrectPassword, setisCorrectPassword] = useState(true);
 
 
-  const SignIn = () => {
-    const usersJson = localStorage.getItem('users');
+  // const SignIn = () => {
+  //   const usersJson = localStorage.getItem('users');
 
-    const users = JSON.parse(usersJson);
-    console.log('users', users)
+  //   const users = JSON.parse(usersJson);
+  //   console.log('users', users)
 
-    //is exist
-    const isEmailExist = users.find(item => email == item.email);
-    console.log('exist', isEmailExist);
-    console.log('exist', !!isEmailExist);
+  //   //is exist
+  //   const isEmailExist = users.find(item => email == item.email);
 
-    if (!isEmailExist) {
-      setIsExist(false);
-    } else {
-      //is password correct
+  //   if (!isEmailExist) {
+  //     setIsExist(false);
+  //   } else {
+  //     //is password correct
 
-      password === isEmailExist.password ? setisCorrectPassword(true) : setisCorrectPassword(false);
-      console.log('password', isEmailExist.password)
-    }
-  }
+  //     password === isEmailExist.password ? setisCorrectPassword(true) : setisCorrectPassword(false);
+
+  //     if (password === isEmailExist.password) {
+  //       localStorage.setItem('isUserAuthrized', email)
+
+  //       setIsUserAuthrized(email)
+  //       console.log('isAuth', isUserAuthrized)
+
+  //       setisSignIn(true)
+
+  //       handleClose()
+  //     }
+  // }
+  // }
 
   //sign up or sign in
 
@@ -135,14 +135,6 @@ export default function BasicModal({ isActive, setIsActive }) {
     setModalState(true)
   }
 
-  //is Sucsessfuly SignUp
-
-
-
-  // const setStateSignUp = () => {
-  //   setIsSucsessfulySignUp(true)
-  // }
-
   return (
     <div>
       <Modal
@@ -155,20 +147,9 @@ export default function BasicModal({ isActive, setIsActive }) {
 
           ?
 
-          (<Box sx={style}>
-            <h1>Sign in</h1>
-
-            <TextField type='text' label='email' onChange={handleChangeEmail} value={email} />
-            <TextField type='password' label='password' id='password' onChange={handleChangePassword} value={password} />
-
-            <br />
-            <Button variant='contained' onClick={SignIn} disabled={(!email, !password)}>Sign in</Button>
-
-            <div>Don't have an account yet?<Button onClick={handleSignUp}>Create one</Button></div>
-
-            {!isExist && <div>You're not signed up</div>}
-            {!isCorrectPassword && <div>uncorrect password</div>}
-          </Box>)
+          <BoxSignIn handleChangeEmail={handleChangeEmail} email={email} handleChangePassword={handleChangePassword}
+            password={password} handleSignUp={handleSignUp} isActive={isActive} setIsActive={setIsActive}
+            setIsUserAuthrized={setIsUserAuthrized} isUserAuthrized={isUserAuthrized} setisSignIn={setisSignIn} handleClose={handleClose} />
 
           :
 
@@ -180,24 +161,10 @@ export default function BasicModal({ isActive, setIsActive }) {
             </Box>
 
             :
-
-            <Box sx={style}>
-              <h1>Sign up</h1>
-
-              <TextField type='text' label='email' onChange={handleChangeEmail} value={email} />
-              <TextField type='text' label='First name' onChange={handleChangeFirstName} value={FirstName} />
-              <TextField type='text' label='Last name' onChange={handleChangeLastName} value={LastName} />
-              <TextField type='password' label='password' id='password' onChange={handleChangePassword} value={password} />
-              <TextField type='password' label='repeat password' onChange={handleChangeRepeatPassword} value={repeatPassword} />
-
-              <br />
-              <Button variant='contained' onClick={handleSubmit} disabled={(!email, !password, !repeatPassword)}>Sign up</Button>
-
-              <Button onClick={handleSignIn}>Sign in</Button>
-
-              {!isEqual && <div>Passwords are not equal</div>}
-              {isAuth && <div>You're already have an account</div>}
-            </Box>)
+ 
+            <BoxSignUp handleChangeEmail={handleChangeEmail} email={email} handleChangePassword={handleChangePassword}
+              password={password} handleSignIn={handleSignIn} setIsSucsessfulySignUp={setIsSucsessfulySignUp} />
+        )
         }
       </Modal>
     </div>
