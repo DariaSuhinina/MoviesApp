@@ -42,10 +42,20 @@ const BoxSignUp = React.forwardRef((props, ref) => {
 
   const [isAuth, setIsAuth] = useState(false);
 
+  const [isIncorrectEmail, setIsIncorrectEmail] = useState(false);
+
   const handleSubmit = () => {
     console.log('email', email);
     console.log('pass', password);
     console.log('repeat', repeatPassword);
+
+    const reg = /\S+@\S+\.\S+/;
+  
+    const result = reg.test(email);
+
+    if(!result) {
+      setIsIncorrectEmail(true)
+    }
 
     // passwords validate
     if (password === repeatPassword) {
@@ -77,7 +87,7 @@ const BoxSignUp = React.forwardRef((props, ref) => {
       setIsAuth(false)
     }
 
-    if (!isEmailExist && password === repeatPassword) {
+    if (!isEmailExist && password === repeatPassword && result) {
       console.log('dtfyguhi')
       localStorage.setItem('users', JSON.stringify([...users, userItem]));
       setIsSucsessfulySignUp(true)
@@ -101,6 +111,7 @@ const BoxSignUp = React.forwardRef((props, ref) => {
 
               {!isEqual && <div>Passwords are not equal</div>}
               {isAuth && <div>You're already have an account</div>}
+              {isIncorrectEmail && <div>Incorrect Email</div>}
             </Box>
     );
   })
