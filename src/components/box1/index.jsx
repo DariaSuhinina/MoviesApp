@@ -19,7 +19,7 @@ const style = {
 
 const BoxSignIn = React.forwardRef((props, ref) => {
 
-  const {isActive, setIsActive, setIsUserAuthrized, isUserAuthrized, setisSignIn, handleChangeEmail, 
+  const {isActive, setIsActive, setAuthrizedUser, AuthrizedUser, setisSignIn, handleChangeEmail, 
     email, handleChangePassword, password, handleSignUp, handleClose} = props;
 
   const [isExist, setIsExist] = useState(true);
@@ -43,10 +43,10 @@ const BoxSignIn = React.forwardRef((props, ref) => {
       password === isEmailExist.password ? setisCorrectPassword(true) : setisCorrectPassword(false);
 
       if (password === isEmailExist.password) {
-        localStorage.setItem('isUserAuthrized', email)
+        localStorage.setItem('AuthrizedUser', email)
 
-        setIsUserAuthrized(email)
-        console.log('isAuth', isUserAuthrized)
+        setAuthrizedUser(email)
+        console.log('isAuth', AuthrizedUser)
 
         setisSignIn(true)
 

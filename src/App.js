@@ -13,12 +13,15 @@ import BasicModal from './components/modal';
 function App() {
   const [isModalOpen, setisModalOpen] = useState(false);
 
-  const [isUserAuthrized, setIsUserAuthrized] = useState('');
+
+  const [AuthrizedUser, setAuthrizedUser] = useState('');
+
+  // const [isUserAuthrized, setIsUserAuthrized] = useState('');
 
   const [isSignIn, setisSignIn] = useState(false);
 
   const handleUser = (username) => {
-    setIsUserAuthrized(username)
+    setAuthrizedUser(username)
 
     console.log('app.js', username)
   }
@@ -29,7 +32,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header setIsOpen={handleClick} isUserAuthrized={isUserAuthrized} setIsUserAuthrized={handleUser} 
+      <Header setIsOpen={handleClick} AuthrizedUser={AuthrizedUser} setAuthrizedUser={handleUser} 
       setisSignIn ={setisSignIn} isSignIn ={isSignIn}/>
 
       <ScrollToTop />
@@ -39,8 +42,8 @@ function App() {
         <Route path='/movie-page/:eventId' element={<Movie />} />
       </Routes>
 
-      <BasicModal isActive={isModalOpen} setIsActive={setisModalOpen} isUserAuthrized={isUserAuthrized} 
-      setIsUserAuthrized={handleUser} setisSignIn ={setisSignIn}/>
+      <BasicModal isActive={isModalOpen} setIsActive={setisModalOpen} AuthrizedUser={AuthrizedUser} 
+      setAuthrizedUser={handleUser} setisSignIn ={setisSignIn}/>
     </BrowserRouter>
   );
 }

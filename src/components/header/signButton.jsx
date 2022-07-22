@@ -3,14 +3,14 @@ import React from 'react';
 import AccountCircle from './accountCircle';
 import Button from '@mui/material/Button';
 
-const SignButton = ({ setIsOpen, setisSignIn, isSignIn, isUserAuthrized, setIsUserAuthrized }) => {
+const SignButton = ({ setIsOpen, setisSignIn, isSignIn, setAuthrizedUser, AuthrizedUser }) => {
 
   const SignOut = () => {
     setisSignIn(false);
 
-    setIsUserAuthrized('')
+    setAuthrizedUser('')
 
-    localStorage.setItem('isUserAuthrized', '')
+    localStorage.setItem('AuthrizedUser', '')
   }
 
   const handleUserName = () => {
@@ -19,7 +19,7 @@ const SignButton = ({ setIsOpen, setisSignIn, isSignIn, isUserAuthrized, setIsUs
     const users = JSON.parse(usersJson);
     console.log('users', users);
 
-    const getUser = users.find(item => isUserAuthrized == item.email);
+    const getUser = users.find(item => AuthrizedUser == item.email);
 
     const userName = getUser.FirstName;
 

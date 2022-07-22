@@ -20,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ isActive, setIsActive, setIsUserAuthrized, isUserAuthrized, setisSignIn }) {
+export default function BasicModal({ isActive, setIsActive, setAuthrizedUser, AuthrizedUser, setisSignIn }) {
 
   const handleOpen = () => setIsActive(true);
 
@@ -41,89 +41,7 @@ export default function BasicModal({ isActive, setIsActive, setIsUserAuthrized, 
     setPassword(e.target.value);
   }
 
-  // const [isEqual, setIsEqual] = useState(true);
-
-  // const [isAuth, setIsAuth] = useState(false);
-
   const [isSucsessfulySignUp, setIsSucsessfulySignUp] = useState(false);
-
-  // const handleSubmit = () => {
-  //   console.log('email', email);
-  //   console.log('pass', password);
-  //   console.log('repeat', repeatPassword);
-
-  //   // passwords validate
-  //   if (password === repeatPassword) {
-  //     setIsEqual(true);
-  //     console.log('passwords are equal')
-  //     console.log(isEqual)
-  //   } else {
-  //     setIsEqual(false);
-  //   }
-
-  //   // local storage
-  //   const usersJson = localStorage.getItem('users');
-  //   let users = JSON.parse(usersJson) || [];
-  //   console.log('users', users);
-
-  //   const userItem = {
-  //     'email': email,
-  //     'FirstName': FirstName,
-  //     'LastName': LastName,
-  //     'password': password,
-  //     'repeatPassword': repeatPassword,
-  //   }
-
-  //   const isEmailExist = users.find(item => email == item.email);
-
-  //   if (isEmailExist) {
-  //     setIsAuth(true)
-  //   } else if (!isEmailExist) {
-  //     setIsAuth(false)
-  //   }
-
-  //   if (!isEmailExist && password === repeatPassword) {
-  //     console.log('dtfyguhi')
-  //     localStorage.setItem('users', JSON.stringify([...users, userItem]));
-  //     setIsSucsessfulySignUp(true)
-  //   }
-  // }
-
-  //handleSignIn
-  // const [isExist, setIsExist] = useState(true);
-  // const [isCorrectPassword, setisCorrectPassword] = useState(true);
-
-
-  // const SignIn = () => {
-  //   const usersJson = localStorage.getItem('users');
-
-  //   const users = JSON.parse(usersJson);
-  //   console.log('users', users)
-
-  //   //is exist
-  //   const isEmailExist = users.find(item => email == item.email);
-
-  //   if (!isEmailExist) {
-  //     setIsExist(false);
-  //   } else {
-  //     //is password correct
-
-  //     password === isEmailExist.password ? setisCorrectPassword(true) : setisCorrectPassword(false);
-
-  //     if (password === isEmailExist.password) {
-  //       localStorage.setItem('isUserAuthrized', email)
-
-  //       setIsUserAuthrized(email)
-  //       console.log('isAuth', isUserAuthrized)
-
-  //       setisSignIn(true)
-
-  //       handleClose()
-  //     }
-  // }
-  // }
-
-  //sign up or sign in
 
   const [modalState, setModalState] = useState(true);
 
@@ -149,7 +67,7 @@ export default function BasicModal({ isActive, setIsActive, setIsUserAuthrized, 
 
           <BoxSignIn handleChangeEmail={handleChangeEmail} email={email} handleChangePassword={handleChangePassword}
             password={password} handleSignUp={handleSignUp} isActive={isActive} setIsActive={setIsActive}
-            setIsUserAuthrized={setIsUserAuthrized} isUserAuthrized={isUserAuthrized} setisSignIn={setisSignIn} handleClose={handleClose} />
+            setAuthrizedUser={setAuthrizedUser} AuthrizedUser={AuthrizedUser} setisSignIn={setisSignIn} handleClose={handleClose} />
 
           :
 
@@ -161,10 +79,10 @@ export default function BasicModal({ isActive, setIsActive, setIsUserAuthrized, 
             </Box>
 
             :
- 
+
             <BoxSignUp handleChangeEmail={handleChangeEmail} email={email} handleChangePassword={handleChangePassword}
               password={password} handleSignIn={handleSignIn} setIsSucsessfulySignUp={setIsSucsessfulySignUp} />
-        )
+          )
         }
       </Modal>
     </div>
